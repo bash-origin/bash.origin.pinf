@@ -16,7 +16,9 @@ Usage
 		local __BO_DIR__="$___TMP___"
 
 
-		BO_callPlugin "bash.origin.pinf" pit "$__BO_DIR__/demo-app"
+		pushd "$__BO_DIR__/demo-app"
+			BO_callPlugin "bash.origin.pinf" pit
+		popd
 	}
 	init
 
@@ -25,6 +27,8 @@ Test
 ----
 
 	./test
+
+After running the test you will find generated bundles at `./demo-app/bundles`.
 
 
 API

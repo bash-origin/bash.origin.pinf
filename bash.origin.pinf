@@ -7,8 +7,29 @@ function init {
 	local __BO_DIR__="$___TMP___"
 
 
+	function ensurePitInstalled {
+		BO_ensureInSystemCache DOWNLOADED_PATH \
+			"github.com/pinf-it/pit-for-npm" \
+			"0.1.1" \
+			"archive.zip" \
+			"https://github.com/pinf-it/pit-for-npm/archive/v0.1.1.zip"
+
+		BO_ensureExtracted EXTRACTED_PATH "$DOWNLOADED_PATH"
+
+		if [ ! -f "$EXTRACTED_PATH/.installed" ]; then
+			pushd "$EXTRACTED_PATH"
+				BO_run_npm install --production
+				touch "$EXTRACTED_PATH/.installed"
+			popd
+		fi
+
+		BO_setResult "$1" "$EXTRACTED_PATH"
+	}
+
 	function pit {
-		echo "TODO: Run 'pit'"
+		local PIT_DIR
+		ensurePitInstalled PIT_DIR
+		"$PIT_DIR/bin/pit" $@
 	}
 }
 init $@
