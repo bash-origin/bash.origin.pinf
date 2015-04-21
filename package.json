@@ -1,0 +1,9 @@
+{
+  "name": "bash.origin.pinf",
+  "version": "0.1.0",
+  "config": {
+    "pio.deploy.converter": {
+      "name": "nodejs-lib"
+    }
+  }
+}
