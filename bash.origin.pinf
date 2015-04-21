@@ -28,5 +28,37 @@ function init {
 		ensurePitInstalled PIT_DIR
 		"$PIT_DIR/bin/pit" $@
 	}
+
+	function ensurePtoInstalled {
+		BO_ensureInSystemCache DOWNLOADED_PATH \
+			"github.com/pinf-to/pto-for-npm" \
+			"0.1.1" \
+			"archive.zip" \
+			"https://github.com/pinf-to/pto-for-npm/archive/v0.1.1.zip"
+		BO_ensureExtracted EXTRACTED_PATH "$DOWNLOADED_PATH"
+		if [ ! -f "$EXTRACTED_PATH/.installed" ]; then
+			pushd "$EXTRACTED_PATH"
+				BO_run_npm install --production
+				touch "$EXTRACTED_PATH/.installed"
+			popd
+		fi
+		BO_setResult "$1" "$EXTRACTED_PATH"
+	}
+
+	function pto {
+
+		if [ "$PTO_USE_EXISTING_PGS_PINF_DIRPATH" != "1" ]; then
+			export PGS_PINF_DIRPATH="`pwd`/.pinf"
+		fi
+
+		local PTO_DIR
+		ensurePtoInstalled PTO_DIR
+		BO_sourcePrototype "$PTO_DIR/bin/pto"
+		runFor "`pwd`" $@
+	}
+
+	if [ "$1" == "pto" ]; then
+		pto ${*:2}
+	fi
 }
 init $@
