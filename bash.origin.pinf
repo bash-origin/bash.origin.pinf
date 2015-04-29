@@ -11,16 +11,14 @@ function init {
 		BO_ensureInSystemCache DOWNLOADED_PATH \
 			"github.com/pinf-it/pit-for-npm" \
 			"0.1.1" \
-			"archive.zip" \
 			"https://github.com/pinf-it/pit-for-npm/archive/v0.1.1.zip"
-		BO_ensureExtracted EXTRACTED_PATH "$DOWNLOADED_PATH"
-		if [ ! -f "$EXTRACTED_PATH/.installed" ]; then
-			pushd "$EXTRACTED_PATH"
+		if [ ! -f "$DOWNLOADED_PATH/.installed" ]; then
+			pushd "$DOWNLOADED_PATH"
 				BO_run_npm install --production
-				touch "$EXTRACTED_PATH/.installed"
+				touch "$DOWNLOADED_PATH/.installed"
 			popd
 		fi
-		BO_setResult "$1" "$EXTRACTED_PATH"
+		BO_setResult "$1" "$DOWNLOADED_PATH"
 	}
 
 	function pit {
@@ -33,16 +31,14 @@ function init {
 		BO_ensureInSystemCache DOWNLOADED_PATH \
 			"github.com/pinf-to/pto-for-npm" \
 			"0.1.1" \
-			"archive.zip" \
 			"https://github.com/pinf-to/pto-for-npm/archive/v0.1.1.zip"
-		BO_ensureExtracted EXTRACTED_PATH "$DOWNLOADED_PATH"
-		if [ ! -f "$EXTRACTED_PATH/.installed" ]; then
-			pushd "$EXTRACTED_PATH"
+		if [ ! -f "$DOWNLOADED_PATH/.installed" ]; then
+			pushd "$DOWNLOADED_PATH"
 				BO_run_npm install --production
-				touch "$EXTRACTED_PATH/.installed"
+				touch "$DOWNLOADED_PATH/.installed"
 			popd
 		fi
-		BO_setResult "$1" "$EXTRACTED_PATH"
+		BO_setResult "$1" "$DOWNLOADED_PATH"
 	}
 
 	function pto {
