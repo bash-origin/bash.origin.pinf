@@ -23,7 +23,7 @@ function init {
 
 	function pit {
 		local PIT_DIR
-		ensurePitInstalled PIT_DIR
+		ensurePitInstalled "PIT_DIR"
 		"$PIT_DIR/bin/pit" $@
 	}
 
@@ -42,13 +42,11 @@ function init {
 	}
 
 	function pto {
-
 		if [ "$PTO_USE_EXISTING_PGS_PINF_DIRPATH" != "1" ]; then
 			export PGS_PINF_DIRPATH="`pwd`/.pinf"
 		fi
-
 		local PTO_DIR
-		ensurePtoInstalled PTO_DIR
+		ensurePtoInstalled "PTO_DIR"
 		BO_sourcePrototype "$PTO_DIR/bin/pto"
 		runFor "`pwd`" $@
 	}
