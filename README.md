@@ -15,9 +15,19 @@ Usage
 		BO_deriveSelfDir ___TMP___ "$BO_SELF_BASH_SOURCE"
 		local __BO_DIR__="$___TMP___"
 
+		# Example: Provision PINF.Genesis for demo app
+		pushd "$__BO_DIR__/demo-app" > /dev/null
+			BO_callPlugin "bash.origin.pinf@0.1.0" ensure genesis $@
+		popd > /dev/null
 
+		# Example: Call PINF.IT for demo app
 		pushd "$__BO_DIR__/demo-app"
 			BO_callPlugin "bash.origin.pinf" pit
+		popd
+
+		# Example: Call PINF.TO for demo app
+		pushd "$__BO_DIR__/demo-app"
+			BO_callPlugin "bash.origin.pinf" pto
 		popd
 	}
 	init
@@ -36,7 +46,17 @@ API
 
 ### `pit ...`
 
-Calls [pit](https://github.com/pinf-it/pit-for-npm) passing along all arguments.
+Calls [pit](https://github.com/pinf-it/pit-for-npm) for current working directory passing along all arguments.
+
+
+### `pto ...`
+
+Calls [pto](https://github.com/pinf-to/pto-for-npm) for current working directory passing along all arguments.
+
+
+### `ensure genesis ...`
+
+Installs [genesis.pinf.org](https://github.com/pinf/genesis.pinf.org) for current working directory passing along all arguments.
 
 
 License

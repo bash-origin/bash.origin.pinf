@@ -7,16 +7,18 @@ function init {
 	local __BO_DIR__="$___TMP___"
 
 
+	BO_checkVerbose "VERBOSE" "$@"
+
 	function ensurePitInstalled {
 		BO_ensureInSystemCache DOWNLOADED_PATH \
 			"github.com/pinf-it/pit-for-npm" \
 			"0.1.1" \
 			"https://github.com/pinf-it/pit-for-npm/archive/v0.1.1.zip"
 		if [ ! -f "$DOWNLOADED_PATH/.installed" ]; then
-			pushd "$DOWNLOADED_PATH"
+			pushd "$DOWNLOADED_PATH" > /dev/null
 				BO_run_npm install --production
 				touch "$DOWNLOADED_PATH/.installed"
-			popd
+			popd > /dev/null
 		fi
 		BO_setResult "$1" "$DOWNLOADED_PATH"
 	}
@@ -33,10 +35,10 @@ function init {
 			"0.1.1" \
 			"https://github.com/pinf-to/pto-for-npm/archive/v0.1.1.zip"
 		if [ ! -f "$DOWNLOADED_PATH/.installed" ]; then
-			pushd "$DOWNLOADED_PATH"
+			pushd "$DOWNLOADED_PATH" > /dev/null
 				BO_run_npm install --production
 				touch "$DOWNLOADED_PATH/.installed"
-			popd
+			popd > /dev/null
 		fi
 		BO_setResult "$1" "$DOWNLOADED_PATH"
 	}
@@ -49,6 +51,34 @@ function init {
 		ensurePtoInstalled "PTO_DIR"
 		BO_sourcePrototype "$PTO_DIR/bin/pto"
 		runFor "`pwd`" $@
+	}
+
+	function ensure {
+		BO_checkVerbose "VERBOSE" "$@"
+		if [ "$1" == "genesis" ]; then
+			format "$VERBOSE" "HEADER" "Ensuring PINF.Genesis"
+			BO_log "$VERBOSE" "For package: $(pwd)"
+
+			# TODO: Load this path from dev toolchain profile or ENV variable.
+			if [ -d "/pinf.genesis/01-genesis.pinf.org" ]; then
+				if [ ! -e "node_modules/genesis.pinf.org" ]; then
+					ln -s /pinf.genesis/01-genesis.pinf.org node_modules/genesis.pinf.org
+				fi
+			else
+				npm install genesis.pinf.org --production
+				# TODO: Create a method to inject '-v' flag if 'VERBOSE' set instead of using 'if'
+				if [ "$VERBOSE" == "1" ]; then
+					node_modules/.bin/genesis.pinf.org install -v
+				else
+					node_modules/.bin/genesis.pinf.org install
+				fi
+			fi
+			popd > /dev/null
+			format "$VERBOSE" "FOOTER"
+		else
+			echo "ERROR: Aspect '$1' not declared!"
+			exit 1
+		fi
 	}
 
 	if [ "$1" == "pto" ]; then
