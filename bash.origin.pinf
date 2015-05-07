@@ -7,8 +7,6 @@ function init {
 	local __BO_DIR__="$___TMP___"
 
 
-	BO_checkVerbose "VERBOSE" "$@"
-
 	function ensurePitInstalled {
 		BO_ensureInSystemCache DOWNLOADED_PATH \
 			"github.com/pinf-it/pit-for-npm" \

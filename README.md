@@ -1,7 +1,7 @@
 bash.origin.pinf
 ================
 
-A plugin for [Bash.Origin](https://github.com/bash-origin/bash.origin) to make [genesis.pinf.org](https://github.com/pinf/genesis.pinf.org) available for early preview.
+A plugin for [Bash.Origin](https://github.com/bash-origin/bash.origin) to make [genesis.pinf.org](https://github.com/pinf/genesis.pinf.org) tools available.
 
 
 Usage
