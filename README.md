@@ -17,17 +17,17 @@ Usage
 
 		# Example: Provision PINF.Genesis for demo app
 		pushd "$__BO_DIR__/demo-app" > /dev/null
-			BO_callPlugin "bash.origin.pinf@0.1.0" ensure genesis $@
+			BO_callPlugin "bash.origin.pinf@0.1.2" ensure genesis $@
 		popd > /dev/null
 
 		# Example: Call PINF.IT for demo app
 		pushd "$__BO_DIR__/demo-app"
-			BO_callPlugin "bash.origin.pinf" pit
+			BO_callPlugin "bash.origin.pinf@0.1.2" pit
 		popd
 
 		# Example: Call PINF.TO for demo app
 		pushd "$__BO_DIR__/demo-app"
-			BO_callPlugin "bash.origin.pinf" pto
+			BO_callPlugin "bash.origin.pinf@0.1.2" pto
 		popd
 	}
 	init
