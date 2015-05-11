@@ -12,7 +12,7 @@ function init {
 			"github.com/pinf-it/pit-for-npm" \
 			"0.1.1" \
 			"https://github.com/pinf-it/pit-for-npm/archive/v0.1.1.zip"
-		if [ ! -f "$DOWNLOADED_PATH/.installed" ]; then
+		if [ ! -e "$DOWNLOADED_PATH/.installed" ]; then
 			pushd "$DOWNLOADED_PATH" > /dev/null
 				BO_run_npm install --production
 				touch "$DOWNLOADED_PATH/.installed"
@@ -32,7 +32,7 @@ function init {
 			"github.com/pinf-to/pto-for-npm" \
 			"0.1.1" \
 			"https://github.com/pinf-to/pto-for-npm/archive/v0.1.1.zip"
-		if [ ! -f "$DOWNLOADED_PATH/.installed" ]; then
+		if [ ! -e "$DOWNLOADED_PATH/.installed" ]; then
 			pushd "$DOWNLOADED_PATH" > /dev/null
 				BO_run_npm install --production
 				touch "$DOWNLOADED_PATH/.installed"
