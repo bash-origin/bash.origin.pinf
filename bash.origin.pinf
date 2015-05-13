@@ -56,6 +56,15 @@ function init {
 		if [ "$1" == "genesis" ]; then
 			BO_format "$VERBOSE" "HEADER" "Ensuring PINF.Genesis"
 			BO_log "$VERBOSE" "For package: $(pwd)"
+			BO_isInSystemCache "DOWNLOADED_PATH" "github.com/pinf/genesis.pinf.org" "0.2.4"
+			if [ "$DOWNLOADED_PATH" == "" ]; then
+				# See if it is in the central cache
+				# TODO: Get central cache path from variable
+				if [ -L "$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0/source/installed/master" ]; then
+					BO_log "$VERBOSE" "Linking 'github.com~pinf~genesis.pinf.org~0' from '$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0' to '$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0'."
+					ln -s "$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0" "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
+				fi
+			fi
 			# TODO: Load version from config.
 			BO_ensureInSystemCache "DOWNLOADED_PATH" "github.com/pinf/genesis.pinf.org" "0.2.4" "https://github.com/pinf/genesis.pinf.org/archive/v0.2.4.zip"
 			if [ ! -e "node_modules/genesis.pinf.org" ]; then
