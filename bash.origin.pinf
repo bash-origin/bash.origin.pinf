@@ -57,6 +57,7 @@ function init {
 			BO_format "$VERBOSE" "HEADER" "Ensuring PINF.Genesis"
 			BO_log "$VERBOSE" "For package: $(pwd)"
 			BO_isInSystemCache "DOWNLOADED_PATH" "github.com/pinf/genesis.pinf.org" "0.2.4"
+			BO_log "$VERBOSE" "Found(1) genesis.pinf.org path: $DOWNLOADED_PATH"
 			if [ "$DOWNLOADED_PATH" == "" ]; then
 				# See if it is in the central cache
 				# TODO: Get central cache path from variable
@@ -65,6 +66,15 @@ function init {
 
 echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
 ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
+
+if [ -e "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0" ]; then
+	echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed"
+	ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed"
+
+	echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed/master"
+	ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed/master"
+fi
+
 
 echo "ls -al 2: $BO_PACKAGES_DIR"
 ls -al "$BO_PACKAGES_DIR"
@@ -84,9 +94,11 @@ ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/"
 			fi
 			# TODO: Load version from config.
 			BO_ensureInSystemCache "DOWNLOADED_PATH" "github.com/pinf/genesis.pinf.org" "0.2.4" "https://github.com/pinf/genesis.pinf.org/archive/v0.2.4.zip"
+			BO_log "$VERBOSE" "Found(2) genesis.pinf.org path: $DOWNLOADED_PATH"
 			if [ ! -e "node_modules/genesis.pinf.org" ]; then
 				ln -s "$DOWNLOADED_PATH" "node_modules/genesis.pinf.org"
 			fi
+			BO_log "$VERBOSE" "Trigger 'pgs.sh install' for: $(pwd)"
 			# TODO: Create a method to inject '-v' flag if 'VERBOSE' set instead of using 'if'
 			if [ "$VERBOSE" == "1" ]; then
 				"node_modules/genesis.pinf.org/.pgs/pgs.sh" install -v
