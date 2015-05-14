@@ -62,7 +62,24 @@ function init {
 				# TODO: Get central cache path from variable
 				if [ -L "$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0/source/installed/master" ]; then
 					BO_log "$VERBOSE" "Linking 'github.com~pinf~genesis.pinf.org~0' from '$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0' to '$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0'."
+
+echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
+ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
+
+echo "ls -al 2: $BO_PACKAGES_DIR"
+ls -al "$BO_PACKAGES_DIR"
+
 					ln -s "$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0" "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
+
+echo "ls -al 3: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
+ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
+
+echo "ls -al 4: $BO_PACKAGES_DIR"
+ls -al "$BO_PACKAGES_DIR"
+
+echo "ls -al 5: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/"
+ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/"
+
 				fi
 			fi
 			# TODO: Load version from config.
