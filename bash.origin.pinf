@@ -68,6 +68,9 @@ echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
 ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
 
 if [ -e "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0" ]; then
+	echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source"
+	ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source"
+
 	echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed"
 	ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed"
 
