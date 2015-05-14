@@ -62,37 +62,14 @@ function init {
 				# See if it is in the central cache
 				# TODO: Get central cache path from variable
 				if [ -L "$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0/source/installed/master" ]; then
-					BO_log "$VERBOSE" "Linking 'github.com~pinf~genesis.pinf.org~0' from '$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0' to '$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0'."
-
-echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
-ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
-
-if [ -e "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0" ]; then
-	echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source"
-	ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source"
-
-	echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed"
-	ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed"
-
-	echo "ls -al 1: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed/master"
-	ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/source/installed/master"
-fi
-
-
-echo "ls -al 2: $BO_PACKAGES_DIR"
-ls -al "$BO_PACKAGES_DIR"
-
-					ln -s "$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0" "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
-
-echo "ls -al 3: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
-ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
-
-echo "ls -al 4: $BO_PACKAGES_DIR"
-ls -al "$BO_PACKAGES_DIR"
-
-echo "ls -al 5: $BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/"
-ls -al "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0/"
-
+					# If not already linked
+					if [ -L "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0" ]; then
+						BO_log "$VERBOSE" "Skip linking 'github.com~pinf~genesis.pinf.org~0' from '$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0' to '$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0' as link already found at target."
+					else
+						BO_log "$VERBOSE" "Linking 'github.com~pinf~genesis.pinf.org~0' from '$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0' to '$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0'."
+						rm -Rf "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0" > /dev/null || true
+						ln -s "$HOME/.bash.origin.cache/github.com~pinf~genesis.pinf.org~0" "$BO_PACKAGES_DIR/github.com~pinf~genesis.pinf.org~0"
+					fi
 				fi
 			fi
 			# TODO: Load version from config.
