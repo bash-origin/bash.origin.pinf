@@ -76,6 +76,9 @@ function init {
 			BO_ensureInSystemCache "DOWNLOADED_PATH" "github.com/pinf/genesis.pinf.org" "0.2.9" "https://github.com/pinf/genesis.pinf.org/archive/v0.2.9.zip"
 			BO_log "$VERBOSE" "Found(2) genesis.pinf.org path: $DOWNLOADED_PATH"
 			if [ ! -e "node_modules/genesis.pinf.org" ]; then
+				if [ ! -e "node_modules" ]; then
+					mkdir node_modules
+				fi
 				ln -s "$DOWNLOADED_PATH" "node_modules/genesis.pinf.org"
 			fi
 			BO_log "$VERBOSE" "Trigger 'pgs.sh install' for: $(pwd)"
